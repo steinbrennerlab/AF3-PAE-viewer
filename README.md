@@ -25,12 +25,13 @@ Since we are particularly interested in Asp14 and Asp15 as a FLS contact point, 
 python plot_PAE.py /path/to/example_data QRLSTGSRINSAKDDAAGLQIA 14 15 
 ```
 
-The script will create a subdirectory "PAE-QRLSTGSRINSAKDDAAGLQIA_14_15" and populate with pdf and csv files for each json file in the originally specified directory. 
+The script will create a subdirectory "PAE-QRLSTGSRINSAKDDAAGLQIA_14_15" and populate the folder with pdf and csv files for each json file in the originally specified directory. 
 
-Most importantly, it will create 
-1. "combined_plots.pdf", 
+Most importantly, it will create the following analyses allowing comparison of output models:
+
+## 1. "combined_plots.pdf", 
 
 ![](images/combined_plots.png)
 
-and 2. "combined_pae_minima.csv", and "combined_reciprocal_pae.csv"
+## 2. "combined_pae_minima.csv", and "combined_reciprocal_pae.csv"
 ![](images/combined_pae_minima.png)
