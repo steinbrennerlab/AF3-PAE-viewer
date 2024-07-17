@@ -12,8 +12,11 @@ MKLLSKTFLILTLTFFFFGIALAKQSFEPEIEALKSFKNGISNDPLGVLSDWTIIGSLRHCNWTGITCDSTGHVVSVSLL
 ```
 
 Call the plot_PAE.py script with arguments as follows:
+
   folder      folder containing json files to analyze
+  
   peptide     sequence in amino acids of the N-terminal peptide
+  
   residues    residues to plot individually
   
 Since we are particularly interested in Asp14 and Asp15 as a FLS contact point, we specify in the example below to graph PAE by residue specificically for residues 14 and 15
