@@ -1,15 +1,23 @@
 # AF3-PAE-viewer
  A script to visualize PAE minima for specific residues in AF3 json data
 
-## Usage
+## The problem
 The folder "example data" contains .json files with PAE matrices for a two protein AlphaFold3 run.
 
+We often want to model peptide interactions with receptors, for example:
 ```
 >flg22
 QRLSTGSRINSAKDDAAGLQIA
 >FLS2-ectodomain
 MKLLSKTFLILTLTFFFFGIALAKQSFEPEIEALKSFKNGISNDPLGVLSDWTIIGSLRHCNWTGITCDSTGHVVSVSLLEKQLEGVLSPAIANLTYLQVLDLTSNSFTGKIPAEIGKLTELNQLILYLNYFSGSIPSGIWELKNIFYLDLRNNLLSGDVPEEICKTSSLVLIGFDYNNLTGKIPECLGDLVHLQMFVAAGNHLTGSIPVSIGTLANLTDLDLSGNQLTGKIPRDFGNLLNLQSLVLTENLLEGDIPAEIGNCSSLVQLELYDNQLTGKIPAELGNLVQLQALRIYKNKLTSSIPSSLFRLTQLTHLGLSENHLVGPISEEIGFLESLEVLTLHSNNFTGEFPQSITNLRNLTVLTVGFNNISGELPADLGLLTNLRNLSAHDNLLTGPIPSSISNCTGLKLLDLSHNQMTGEIPRGFGRMNLTFISIGRNHFTGEIPDDIFNCSNLETLSVADNNLTGTLKPLIGKLQKLRILQVSYNSLTGPIPREIGNLKDLNILYLHSNGFTGRIPREMSNLTLLQGLRMYSNDLEGPIPEEMFDMKLLSVLDLSNNKFSGQIPALFSKLESLTYLSLQGNKFNGSIPASLKSLSLLNTFDISDNLLTGTIPGELLASLKNMQLYLNFSNNLLTGTIPKELGKLEMVQEIDLSNNLFSGSIPRSLQACKNVFTLDFSQNNLSGHIPDEVFQGMDMIISLNLSRNSFSGEIPQSFGNMTHLVSLDLSSNNLTGEIPESLANLSTLKHLKLASNNLKGHVPESGVFKNINASDLMGNTDLCGSKKPLKPCTIKQKSSHFSKRTR
 ```
+
+However, the default PAE viewer for Alphafold is not very informative
+![](images/AF3_output.png)
+
+This script is a starting point to quickly analyze PAE minima and compare AF3 models.
+
+## Usage
 
 Call the plot_PAE.py script with the following 3 arguments:
 
@@ -29,9 +37,9 @@ The script will create a subdirectory "PAE-QRLSTGSRINSAKDDAAGLQIA_14_15" and pop
 
 Most importantly, it will create the following analyses allowing comparison of output models:
 
-## 1. "combined_plots.pdf", 
+## 1. combined_plots.pdf 
 
 ![](images/combined_plots.png)
 
-## 2. "combined_pae_minima.csv", and "combined_reciprocal_pae.csv"
+## 2. combined_pae_minima.csv and combined_reciprocal_pae.csv
 ![](images/combined_pae_minima.png)
