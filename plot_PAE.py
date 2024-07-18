@@ -74,6 +74,7 @@ def process_json_file(file_path, peptide_sequence, residues, combined_pdf, outpu
 
         # Calculate minimum PAE values
         pae_minima = []
+        pae_minima_residues = []
         labels = []
         residues_list = []
         for n in range(peptide_length):
@@ -85,28 +86,35 @@ def process_json_file(file_path, peptide_sequence, residues, combined_pdf, outpu
             residues_list.append(aminoacid)
             labels.append(str(n+1))
             pae_minima.append(min_value)
+            min_position = np.argmin(modified_array) + 1 #add one to give residue number, rather than array position
+            pae_minima_residues.append(min_position)
 
         df = pd.DataFrame({
             'residue_num': labels,
             'residues': residues_list,
-            base_name: pae_minima
+            base_name: pae_minima,
+            str(base_name+"res"): pae_minima_residues
         })
         
         df.to_csv(os.path.join(output_folder, f"{base_name}_pae_minima.csv"), index=False)
         
         # Calculate and save minimum reciprocal PAE scores for peptide sequence
         reciprocal_pae_minima = []
+        pae_minima_residues = []
         for n in range(peptide_length):
             exclude_n_term_length = peptide_length
             array = pae_data2.iloc[:,int(n)]
             modified_array = array[exclude_n_term_length:]
             min_value = min(modified_array)
             reciprocal_pae_minima.append(min_value)
+            min_position = np.argmin(modified_array) + 1 #add one to give residue number, rather than array position
+            pae_minima_residues.append(min_position)
         
         reciprocal_pae_df = pd.DataFrame({
             'residue_num': labels,
             'residues': residues_list,
-            f'{base_name}_reciprocal_min': reciprocal_pae_minima
+            f'{base_name}_reciprocal_min': reciprocal_pae_minima,
+            str(base_name+"res"): pae_minima_residues
         })
         
         reciprocal_pae_df.to_csv(os.path.join(output_folder, f"{base_name}_reciprocal_pae_minima.csv"), index=False)
@@ -130,7 +138,12 @@ def create_combined_csv(all_data, output_folder):
     print(f"Combined CSV saved as: {combined_csv_path}")
 
 def create_combined_reciprocal_pae(all_reciprocal_data, output_folder):
-    combined_reciprocal_df = pd.concat(all_reciprocal_data, axis=1, keys=range(len(all_reciprocal_data)))
+    combined_reciprocal_df = pd.DataFrame()
+    for df in all_reciprocal_data:
+        if combined_reciprocal_df.empty:
+            combined_reciprocal_df = df[['residue_num', 'residues']]
+        combined_reciprocal_df = pd.merge(combined_reciprocal_df, df, on=['residue_num', 'residues'], how='outer')    
+        
     combined_reciprocal_csv_path = os.path.join(output_folder, "combined_reciprocal_pae.csv")
     combined_reciprocal_df.to_csv(combined_reciprocal_csv_path)
     print(f"Combined reciprocal PAE CSV saved as: {combined_reciprocal_csv_path}")
